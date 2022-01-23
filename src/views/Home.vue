@@ -1,18 +1,27 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloBanner/>
+    <SearchArea/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloBanner from '@/components/HelloBanner.vue'
+import SearchArea from '@/components/SearchArea.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    HelloBanner,
+    SearchArea
   }
 }
 </script>
+
+<style lang="scss">
+.home {
+  min-height: 100vh;
+  background-color: #3D405B;
+}
+</style>
