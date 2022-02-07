@@ -1,10 +1,18 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> | 
-    <router-link to="/about"><font-awesome-icon icon="shopping-cart" /></router-link>
+    <router-link to="/basket"><font-awesome-icon icon="shopping-cart" /></router-link>
   </div>
   <router-view/>
 </template>
+
+<script>
+export default {
+  mounted() {
+    this.$store.commit('updateCartFromLocalStorage')
+  }
+}
+</script>
 
 <style lang="scss">
 
