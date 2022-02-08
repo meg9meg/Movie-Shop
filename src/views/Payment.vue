@@ -16,17 +16,18 @@
               <label for="creditcard">Credit/Debit Card <font-awesome-icon :icon="['fab', 'cc-visa']" /><font-awesome-icon :icon="['fab', 'cc-mastercard']" /></label>
             <ErrorMessage name="payment" />
           </div>
-          
-          <button><font-awesome-icon icon="lock" />Finish and pay</button>
+          <router-link v-bind:class="[next ? 'enabled' : 'disabled']" style="text-decoration: none" :to="'/thankyoupage'">
+            <button><font-awesome-icon icon="lock" />Finish and pay</button>
+          </router-link>
         </div>        
     </Form>
       <div class="buttons">
         <router-link v-bind:class="[next ? 'disabled' : 'enabled']" style="text-decoration: none" :to="'/shippingdetails'">
           <button>Go back</button>
         </router-link>
-        <router-link v-bind:class="[next ? 'enabled' : 'disabled']" style="text-decoration: none" :to="'/thankyoupage'">
+        <!--router-link v-bind:class="[next ? 'enabled' : 'disabled']" style="text-decoration: none" :to="'/thankyoupage'">
           <button>Next</button>
-        </router-link>
+        </router-link-->
       </div>
   </div>
 </template>

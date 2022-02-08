@@ -1,16 +1,17 @@
 import { createStore } from 'vuex'
 
-function updateLocalStorage(cart) {
-  localStorage.setItem('shoppingcart', JSON.stringify(cart))
+function updateLocalStorage(shoppingcart) {
+  localStorage.setItem('shoppingcart', JSON.stringify(shoppingcart))
 }
 
 export default createStore({
   state: {
-    shoppingcart: []
+    shoppingcart: [],
+    total_amount: 0,
   },
   getters: {
-    productQuantity: state => product => {
-      const item = state.shoppingcart.find(i => i.id === product.id)
+    productQuantity: state => movie => {
+      const item = state.shoppingcart.find(i => i.id === movie.imdbID)
 
       if (item) return item.quantity
       else return null
@@ -20,16 +21,31 @@ export default createStore({
     },
   },
   mutations: {
-    addToCart (state, product) {
-      let item = state.shoppingcart.find(i => i.id === product.id)
+    addToCart (state, movie) {
+      let item = state.shoppingcart.find(i => i.id === movie.imdbID)
 
       if(item) {
         item.quantity++
       } else {
-        state.shoppingcart.push({...product, quantity: 1})
+        state.shoppingcart.push({...movie, quantity: 1})
       }
 
       updateLocalStorage(state.shoppingcart)
     },
+    removeFromCart (state, movie) {
+      let item = state.shoppingcart.find(i => i.id === movie.imdbID)
+      state.shoppingcart.splice(item, 1)
+
+      updateLocalStorage(state.shoppingcart)
+    },
+    updateTotal (state, total_cost) {
+      state.total_amount = total_cost
+    },
+    updateCartFromLocalStorage(state) {
+      const shoppingcart = localStorage.getItem('shoppingcart')
+      if (shoppingcart) {
+        state.shoppingcart = JSON.parse(shoppingcart)
+      }
+    }
   }
 })

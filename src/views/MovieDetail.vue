@@ -21,7 +21,7 @@
                 </ul>
                 <div class="movie-price">
                     <h4>12$</h4>
-                    <font-awesome-icon class="add" icon="cart-plus" />
+                    <font-awesome-icon class="add" icon="cart-plus" @click="addToCart(movie)"/>
                 </div>
             </div>
         </div>
@@ -34,9 +34,11 @@
 import { ref, onBeforeMount } from 'vue';
 import { useRoute } from 'vue-router';
 import key from '@/apikey.js';
+import { useStore } from 'vuex';
 
 export default {
     setup () {
+        const store = useStore();
         const movie = ref({});
         const r = useRoute();
 
@@ -47,8 +49,14 @@ export default {
                     movie.value = data;
                 })
         })
+
+        const addToCart = (movie) => {
+            store.commit('addToCart', movie)
+        }
+
         return {
-            movie
+            movie,
+            addToCart
         }
     }
 }

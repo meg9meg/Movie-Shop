@@ -1,15 +1,23 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> | 
-    <router-link to="/basket"><font-awesome-icon icon="shopping-cart" /></router-link>
+    <router-link to="/basket"><font-awesome-icon icon="shopping-cart" /><span>{{ product_total }}</span></router-link>
+    <p></p>
   </div>
   <router-view/>
 </template>
 
 <script>
+//import { mapState } from 'vuex'
+
 export default {
   mounted() {
     this.$store.commit('updateCartFromLocalStorage')
+  },
+  computed: {   
+    product_total() {
+      return this.$store.state.shoppingcart.length
+    }
   }
 }
 </script>
@@ -42,6 +50,11 @@ export default {
     text-decoration: none;
 
     &.router-link-exact-active {
+      color: #F2CC8F;
+    }
+
+    span {
+      font-size: 16px;
       color: #F2CC8F;
     }
   }

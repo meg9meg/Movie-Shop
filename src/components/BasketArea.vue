@@ -7,23 +7,25 @@
         <p class="basket-price">Price</p>
         <span></span>
       </div>
-      <div class="basket-items">
-        <p class="item-title">Harry Potter and the Deathly Hallows: Part 2</p>
+      <div class="basket-items" v-for="movie in movies" 
+      :key="movie.imdbID">
+        <p class="item-title">{{ movie.Title }}</p>
         <p class="item-quantity">1</p>
-        <p class="item-price">12$</p>
-        <font-awesome-icon class="remove" icon="trash-alt" />
+        <p class="item-price">{{ price }}$</p>
+        <font-awesome-icon class="remove" icon="trash-alt" @click="removeFromCart(movie)"/>
       </div>
       <div class="basket-total">
-        <div class="discount">
+        <form class="discount" @submit.prevent="apply_discount()">
           <p>Enter discount code here:</p>
-          <input type="text">
+          <input type="text" v-model="disc">
           <input type="submit" value="Add">
-        </div>
+          <p class="no-discount">{{ errormsg }}</p>
+        </form>
         <div class="cost-summary">
-          <p class="total-sub">Sub Total </p><span class="price">30$</span>
-          <p class="shipping-cost">Shipping </p><span class="price">15$</span>
-          <p class="total-discount">Discount </p><span class="price">0$</span>
-          <p class="total-amount">Total </p><span class="price">45$</span>
+          <p class="total-sub">Sub Total </p><span class="price">{{ movies_cost }}$</span>
+          <p class="shipping-cost">Shipping </p><span class="price">{{ shipping }}$</span>
+          <p class="total-discount">Discount </p><span class="price">{{ discount }}$</span>
+          <p class="total-amount">Total </p><span class="price">{{ total_cost }}$</span>
         </div>
       </div>
       <div class="buttons">
@@ -31,7 +33,7 @@
           <button>Go back</button>
         </router-link>
         <router-link style="text-decoration: none" :to="'/shippingdetails'">
-          <button>Next</button>
+          <button @click="passTotal(total_cost)">Next</button>
         </router-link>
       </div>
   </div>
@@ -40,6 +42,47 @@
 <script>
 export default {
     name: "BasketArea",
+    props: ['movie'],
+    data() {
+      return {
+        disc: "",
+        errormsg: "",
+        discount: 0,
+        price: 12,
+        shipping: 15,
+      }
+    },
+    methods: {
+      removeFromCart(movie) {
+        this.$store.commit('removeFromCart', movie)
+      },
+      apply_discount() {
+        this.errormsg = ""
+        if(this.disc === "promo10"){
+          console.log('dziala');
+          this.discount = 10;      
+        } else {
+          this.errormsg = "Sorry but discount doesn't exsists"
+        }
+        this.disc = "";
+      },
+      passTotal(p) {
+        this.$store.commit('updateTotal', p)
+        console.log(this.$store.state.total_amount);
+      },
+    },
+
+    computed: {
+      movies() {
+        return this.$store.getters.cartItems
+      },
+      movies_cost() {
+        return this.$store.state.shoppingcart.length * this.price
+      },
+      total_cost() {
+        return this.movies_cost + this.shipping - this.discount
+      }
+    }
 }
 </script>
 
@@ -130,6 +173,11 @@ export default {
           @media screen and (max-width: 600px) {
               font-size: 14px; 
           }
+        }
+
+        .no-discount {
+          color: red;
+          font-weight: 300;
         }
 
         input {

@@ -32,7 +32,7 @@
 import { ref } from 'vue';
 import key from '@/apikey.js';
 
-export default {
+export default { 
   name: 'SearchArea',
 
   setup() {
