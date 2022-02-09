@@ -20,7 +20,7 @@
         </router-link>
           <div class="movie-price">
             <h4>12$</h4>
-            <font-awesome-icon class="add" icon="cart-plus" />
+            <font-awesome-icon class="add" icon="cart-plus" @click="addToCart(movie)" />
           </div>
         </div>
     </div>
@@ -31,11 +31,13 @@
 <script>
 import { ref } from 'vue';
 import key from '@/apikey.js';
+import { useStore } from 'vuex';
 
 export default { 
   name: 'SearchArea',
 
   setup() {
+      const store = useStore();
       const title = ref("");
       const movies = ref([]);
 
@@ -49,10 +51,14 @@ export default {
             })
         }
       }
+      const addToCart = (movie) => {
+        store.commit('addToCart', movie)
+      }
 
       return {
           title,
           movies,
+          addToCart,
           SearchMovies
       }
   }

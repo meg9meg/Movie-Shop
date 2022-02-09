@@ -17,7 +17,7 @@
             <ErrorMessage name="payment" />
           </div>
           <router-link v-bind:class="[next ? 'enabled' : 'disabled']" style="text-decoration: none" :to="'/thankyoupage'">
-            <button><font-awesome-icon icon="lock" />Finish and pay</button>
+            <button @click="clearCart()"><font-awesome-icon icon="lock" />Finish and pay</button>
           </router-link>
         </div>        
     </Form>
@@ -53,8 +53,7 @@ export default {
         })   
       };
   },
-
-   methods: {
+  methods: {
       onSubmit(values, { resetForm }) {
         console.log(JSON.stringify(values, null ,2));
         this.next = true;
