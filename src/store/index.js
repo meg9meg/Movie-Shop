@@ -46,6 +46,10 @@ export default createStore({
       if (shoppingcart) {
         state.shoppingcart = JSON.parse(shoppingcart)
       }
+    },
+    clearFromCart(state) {
+      state.shoppingcart = [],
+      state.total_amount = 0
     }
   }
 })

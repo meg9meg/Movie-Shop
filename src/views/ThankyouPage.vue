@@ -9,7 +9,9 @@
 
 <script>
 export default {
-
+  mounted() {
+    this.$store.commit('clearFromCart')
+  },
 }
 </script>
 
