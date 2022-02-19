@@ -1,1 +1,1 @@
-module.exports = { baseUrl: ‘/Movie-Shop/’ }
+//module.exports = { baseUrl: ‘/Movie-Shop/’ }
