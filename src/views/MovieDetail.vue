@@ -6,10 +6,12 @@
         </div>
         <div class="details-main">
             <div class="details-left">
-                <img :src="movie.Poster" alt="">
+                <img v-if="movie.Poster === 'N/A'" class="standard-image" src="https://us.123rf.com/450wm/vadmary/vadmary1704/vadmary170400009/75732094-popcorn-cinema-reel-disposable-cup-clapper-board-and-tickets-at-blue-background-concept-cinema-theat.jpg?ver=6">
+                <img v-else :src="movie.Poster">
             </div>
             <div class="details-right">
-                <p>{{ movie.Plot }}</p>
+                <p v-if="movie.Poster != 'N/A'">{{ movie.Plot }}</p>
+                <p v-else >No plot description for this movie :(</p>
                 <ul>
                     <li><b>Type: </b>{{ movie.Genre }}</li>
                     <li><b>Duration: </b>{{ movie.Runtime }}</li>
@@ -96,15 +98,15 @@ export default {
             flex-grow: 1;
             display: flex;
             flex-direction: row;
+            @media screen and (max-width: 900px){
+                flex-direction: column;
+            }
 
             .details-left {
                 width: 50%;
                 align-self: center;
-
-                img {
-                    @media screen and (max-width: 900px){
-                        width: 90%;
-                    }
+                @media screen and (max-width: 900px){
+                    width: 100%;
                 }
             }
 
@@ -118,19 +120,26 @@ export default {
                 flex-direction: column;
                 flex-wrap: wrap;
                 justify-content: center;
-
                 @media screen and (max-width: 900px){
-                        font-size: 14px;
+                    width: 100%;
+                    padding-right: 0;
                 }
 
                 p {
                     width: 80%;
+                    @media screen and (max-width: 900px){
+                        align-self: center;
+                    }
                 }
 
                 ul {
                     text-align: left;
                     list-style: none;
                     padding: 30px 0;
+                    @media screen and (max-width: 900px){
+                        width: 80%;
+                        align-self: center;
+                    }
                 }
 
                 .movie-price {
@@ -140,6 +149,9 @@ export default {
                     margin-top: 15px;
                     font-size: 35px;
                     color: #E07A5F;
+                    @media screen and (max-width: 900px){
+                        justify-content: center;
+                    }
 
                     .add {
                         background-color: #F4F1DE;

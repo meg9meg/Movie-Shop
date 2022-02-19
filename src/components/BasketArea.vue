@@ -32,7 +32,7 @@
         <router-link style="text-decoration: none" :to="'/'">
           <button>Go back</button>
         </router-link>
-        <router-link style="text-decoration: none" :to="'/shippingdetails'">
+        <router-link v-bind:class="[movies_count != true ? 'disabled' : 'enabled']" style="text-decoration: none" :to="'/shippingdetails'">
           <button @click="passTotal(total_cost)">Next</button>
         </router-link>
       </div>
@@ -81,6 +81,12 @@ export default {
       },
       total_cost() {
         return this.movies_cost + this.shipping - this.discount
+      },
+      movies_count() {
+        if (this.$store.getters.cartItems.length) {
+          return true;
+        }
+        return false
       }
     }
 }
@@ -256,6 +262,16 @@ export default {
       height: 80px;
       justify-content: space-between;
       align-items: center;
+
+      .disabled {
+          opacity: 0.5;
+          pointer-events: none ;
+        }
+
+      .enabled {
+        opacity: 1;
+        pointer-events: auto ;
+      }
 
       button {
         width: 80px;

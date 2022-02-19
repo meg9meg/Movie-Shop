@@ -48,8 +48,13 @@ export default createStore({
       }
     },
     clearFromCart(state) {
-      state.shoppingcart = [],
+      const cart = localStorage.getItem('shoppingcart')
+      if (cart) {
+        state.shoppingcart = JSON.parse(cart)
+      }
+      state.shoppingcart = []
       state.total_amount = 0
+      
     }
   }
 })

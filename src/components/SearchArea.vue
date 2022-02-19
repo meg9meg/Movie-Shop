@@ -10,8 +10,9 @@
       <div class="movie" v-for="movie in movies" :key="movie.imdbID">
         <router-link style="text-decoration: none" :to="'/movie/' + movie.imdbID" class="movie-link">
             <div class="movie-image">
-              <img :src="movie.Poster" alt="Movie Poster">
-              <!--div class="movie-type">{{ movie.Type }}</div-->
+              <img v-if="movie.Poster === 'N/A'" class="standard-image" src="https://us.123rf.com/450wm/vadmary/vadmary1704/vadmary170400009/75732094-popcorn-cinema-reel-disposable-cup-clapper-board-and-tickets-at-blue-background-concept-cinema-theat.jpg?ver=6" alt="Movie Poster">
+              <img v-else :src="movie.Poster" alt="Movie Poster">
+              <!--div class="movie-type">{{ .Type }}</div-->
             </div>
             <div class="movie-detail">
               <p class="movie-year">{{ movie.Year }}</p>
@@ -98,6 +99,11 @@ export default {
                 padding: 5px;
                 color: #2c3e50;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+                @media screen and (max-width: 900px){
+                  width: 50%;
+                  font-size: 16px;
+                }
             }
             
             &[type="submit"] {
@@ -133,6 +139,13 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            .movie-image {
+              
+              .standard-image {
+                max-width: 100%;
+              }
+            }
 
             .movie-detail {
               font-family: Raleway;

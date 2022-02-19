@@ -8,12 +8,11 @@
 </template>
 
 <script>
-//import { mapState } from 'vuex'
 
 export default {
-  mounted() {
+  /*mounted() {
     this.$store.commit('updateCartFromLocalStorage')
-  },
+  },*/
   computed: {   
     product_total() {
       return this.$store.state.shoppingcart.length

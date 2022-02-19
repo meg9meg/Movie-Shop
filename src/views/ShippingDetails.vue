@@ -155,10 +155,7 @@ export default {
           }
         }
       }
-
-
     }
-
 
     .buttons {
       display: flex;
