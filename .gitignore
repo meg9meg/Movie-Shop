@@ -1,3 +1,5 @@
+apikey.js
+./src/apikey.js
 .DS_Store
 node_modules
 /dist
