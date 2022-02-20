@@ -45,7 +45,7 @@ export default {
         const r = useRoute();
 
         onBeforeMount(() => {
-            fetch(`http://www.omdbapi.com/?apikey=${key.apikey}&i=${r.params.id}`)
+            fetch(`https://www.omdbapi.com/?apikey=${key.apikey}&i=${r.params.id}`)
                 .then(res => res.json())
                 .then(data => {
                     movie.value = data;
