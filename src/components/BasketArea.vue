@@ -24,7 +24,7 @@
         <div class="cost-summary">
           <p class="total-sub">Sub Total </p><span class="price">{{ movies_cost }}$</span>
           <p class="shipping-cost">Shipping </p><span class="price">{{ shipping }}$</span>
-          <p class="total-discount">Discount </p><span class="price">{{ discount }}$</span>
+          <p class="total-discount">Discount </p><span class="price">{{ discount_amount }}$</span>
           <p class="total-amount">Total </p><span class="price">{{ total_cost }}$</span>
         </div>
       </div>
@@ -59,8 +59,7 @@ export default {
       apply_discount() {
         this.errormsg = ""
         if(this.disc === "promo10"){
-          console.log('dziala');
-          this.discount = 10;      
+          this.discount = 0.1;      
         } else {
           this.errormsg = "Sorry but discount doesn't exsists"
         }
@@ -79,8 +78,11 @@ export default {
       movies_cost() {
         return this.$store.state.shoppingcart.length * this.price
       },
+      discount_amount(){
+        return (this.$store.state.shoppingcart.length * this.price * this.discount).toFixed(2)
+      },
       total_cost() {
-        return this.movies_cost + this.shipping - this.discount
+        return this.movies_cost + this.shipping - this.discount_amount
       },
       movies_count() {
         if (this.$store.getters.cartItems.length) {

@@ -107,6 +107,9 @@ export default {
       .form-header {
         width: 100%;
         padding-bottom: 30px;
+        @media screen and (max-width: 400px) {
+            font-size: 20px;
+        }
       }
 
       .form-field-container {
@@ -125,6 +128,10 @@ export default {
           outline: none;
           border-radius: 5px;
           font-size: 16px;
+          @media screen and (max-width: 400px) {
+            width: 300px;
+            height: 25px;
+          }
         }
         label {
           display: block;
@@ -132,6 +139,9 @@ export default {
           margin-bottom: 3px;
           color: #3D405B;
           font-weight: 500;
+          @media screen and (max-width: 400px) {
+            font-size: 16px;
+          }
         }
 
         .error {
