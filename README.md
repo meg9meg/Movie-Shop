@@ -1,24 +1,35 @@
-# movieshop
+# Movie Shop App
 
-## Project setup
-```
-npm install
-```
+## Table of content
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [API](#api)
+* [GithubPages](#githubpages)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## General info
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Movie Shop App is front-end project for movie shop. 
+Main functionalities:
+* search for movies
+* add movies to cart
+* remove items from cart
+* insert discount code
+* insert shipping data
+* choose payment method
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Technologies
+Project is created with:
+* Vue.js
+* vue-router
+* vuex
+* SCSS
+* Flexbox
+* API
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## API
+
+Project is based on API http://www.omdbapi.com/
+
+## GithubPages
+
+You can check my project here: https://meg9meg.github.io/movie-shop/
